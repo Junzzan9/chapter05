@@ -18,8 +18,6 @@ public class PersonApp {
 		InputStream in = new FileInputStream("C:\\javaStudy\\file\\PhoneDB.txt");
 		InputStreamReader ir = new InputStreamReader(in, "UTF-8");
 		BufferedReader br = new BufferedReader(ir);
-		Writer fw = new FileWriter("C:\\javaStudy\\file\\PhoneDB01.txt");
-		BufferedWriter bw = new BufferedWriter(fw);
 		List<Person> pList = new ArrayList<Person>();
 		Scanner sc = new Scanner(System.in);
 
@@ -42,17 +40,19 @@ public class PersonApp {
 			System.out.println("등록할 친구정보를 입력해주세요     종료:q");
 			String info = sc.next();
 			if (info.equals("q")) {
-				ShowAll(pList);
 				break;
 			}
 			System.out.println("친구정보를 몇번째로 저장하시겠습니까?");
 			int num = sc.nextInt();
 			String[] pInfo = info.split(",");
 			Person p = new Person(pInfo[0], pInfo[1], pInfo[2]);
-			pList.add(num,p);
+			pList.add(num-1,p);
 		}
 		ShowAll(pList);
 		
+		
+		Writer fw = new FileWriter("C:\\javaStudy\\file\\PhoneDB.txt");
+		BufferedWriter bw = new BufferedWriter(fw);
 		String str = "";
 		for (int i = 0; i < pList.size(); i++) {
 			str = pList.get(i).save();
